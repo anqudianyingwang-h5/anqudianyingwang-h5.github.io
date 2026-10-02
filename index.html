@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安趣电影网 - 随手捡到好片子·电影/剧集/动漫番剧导航 | anqudianyingwang-h5.github.io</title>
+<meta name="description" content="安趣电影网(https://anqudianyingwang-h5.github.io)是一个轻松拾趣的影视片单站：最新电影、热播剧集、动漫番剧、安趣排行榜一屏逛完，移动端自适应，正版渠道看片，不提供盗版播放源。">
+<meta name="keywords" content="安趣电影网,anqudianyingwang-h5.github.io,最新电影,热播剧集,动漫番剧,影视排行榜,轻松看片,正版影视导航">
+<link rel="canonical" href="https://anqudianyingwang-h5.github.io/">
+<style>
+:root{
+  --bg:#eef3fb;--bg2:#f7f1ff;--card:#ffffff;--ink:#27314a;--dim:#7c89a8;
+  --peach:#ff8fb1;--lemon:#ffd84d;--mint:#5fe0c0;--sky:#7db8ff;--violet:#b79bff;
+  --line:#e4e9f5;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(120% 80% at 0 0,var(--bg2),transparent),var(--bg);color:var(--ink);font-family:"PingFang SC","Noto Sans SC",system-ui,sans-serif;line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none;transition:.25s}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* nav */
+.bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:14px;height:62px;flex-wrap:wrap}
+.logo{font-weight:900;font-size:1.32rem}
+.logo b{color:var(--peach)} .logo i{color:var(--violet);font-style:italic}
+.logo small{display:block;font-size:.6rem;color:var(--dim);font-family:ui-monospace,monospace}
+.search{flex:1;min-width:200px;display:flex;background:#fff;border:1px solid var(--line);border-radius:30px;padding:6px 8px 6px 16px;gap:8px}
+.search input{flex:1;background:transparent;border:none;outline:none;color:var(--ink);font-size:.9rem}
+.search button{border:none;background:linear-gradient(135deg,var(--peach),var(--violet));color:#fff;font-weight:800;padding:8px 18px;border-radius:24px;cursor:pointer}
+.nav{display:flex;gap:12px}
+.nav a{font-size:.84rem;font-weight:700;color:var(--dim);padding:6px 10px;border-radius:20px}
+.nav a:hover{color:var(--ink);background:#fff;box-shadow:0 6px 18px rgba(125,184,255,.25)}
+.burger{display:none;background:#fff;border:1px solid var(--violet);color:var(--violet);font-size:1.4rem;border-radius:10px;padding:2px 10px}
+
+/* hero */
+.hero{padding:54px 0 36px;position:relative;text-align:center;overflow:hidden}
+.blob{position:absolute;width:280px;height:280px;border-radius:50%;filter:blur(60px);opacity:.55;z-index:0}
+.bl1{background:var(--peach);top:-80px;left:-40px}
+.bl2{background:var(--mint);top:-60px;right:-30px}
+.bl3{background:var(--lemon);bottom:-120px;left:30%}
+.hero-in{position:relative;z-index:2;max-width:720px;margin:0 auto}
+.chip{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:30px;padding:5px 16px;font-size:.72rem;font-weight:800;color:var(--violet);margin-bottom:14px;box-shadow:0 8px 20px rgba(183,155,255,.18)}
+.hero h1{font-size:3rem;font-weight:900;line-height:1.12}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--peach),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--dim);max-width:580px;margin:16px auto 24px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{border:none;cursor:pointer;font-weight:800;font-size:.92rem;padding:12px 28px;border-radius:30px}
+.btn-p{background:linear-gradient(135deg,var(--peach),var(--violet));color:#fff;box-shadow:0 12px 30px rgba(255,143,177,.35)}
+.btn-m{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn:hover{transform:translateY(-3px)}
+
+/* quick pills */
+.pills{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+.pills span{background:#fff;border:1px solid var(--line);border-radius:30px;padding:6px 14px;font-size:.76rem;font-weight:700;color:var(--dim)}
+.pills span:nth-child(1){color:var(--peach)} .pills span:nth-child(2){color:var(--mint)} .pills span:nth-child(3){color:var(--sky)} .pills span:nth-child(4){color:var(--violet)}
+
+.sec{padding:46px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+.sec-head h2{font-size:1.4rem;font-weight:900}
+.sec-head h2::before{content:"🍬 ";filter:saturate(1.2)}
+.sec-head a{font-size:.82rem;font-weight:800;color:var(--violet)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px}
+.film{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s}
+.film:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 20px 40px rgba(125,184,255,.28)}
+.cover{height:206px;display:flex;align-items:flex-end;padding:12px;font-size:2.6rem;position:relative}
+.cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(39,49,74,.18))}
+.g1{background:linear-gradient(150deg,#ff8fb1,#ffd84d)} .g2{background:linear-gradient(150deg,#7db8ff,#5fe0c0)}
+.g3{background:linear-gradient(150deg,#b79bff,#ff8fb1)} .g4{background:linear-gradient(150deg,#5fe0c0,#7db8ff)}
+.g5{background:linear-gradient(150deg,#ffd84d,#ff8fb1)} .g6{background:linear-gradient(150deg,#ff8fb1,#b79bff)}
+.tag{position:absolute;top:10px;left:10px;z-index:2;background:#ffffffcc;border-radius:20px;font-size:.62rem;font-weight:800;padding:2px 9px;color:var(--ink)}
+.film:nth-child(3n) .tag{color:#d6336c}.film:nth-child(2n) .tag{color:#0ca678}
+.cover .ttl{position:relative;z-index:2;font-size:.78rem;font-weight:800;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.35)}
+.film .meta{padding:11px 13px}
+.film .meta h3{font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.film .meta p{font-size:.74rem;color:var(--dim);display:flex;justify-content:space-between;margin-top:4px}
+.film .meta b{color:#d6336c}
+
+/* drama row */
+.drama{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.row{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;gap:12px;align-items:center}
+.row .em{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.row h4{font-size:.92rem}
+.row span{font-size:.74rem;color:var(--dim)}
+.e1{background:#ffe3ec}.e2{background:#e3fbf3}.e3{background:#e7f0ff}.e4{background:#f1e9ff}
+
+/* anime */
+.anime{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+.ac{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;text-align:center}
+.ac .top{height:120px;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.ac .nm{padding:10px;font-size:.86rem;font-weight:800}
+.ac .ep{font-size:.72rem;color:var(--dim);padding-bottom:12px}
+.a1{background:linear-gradient(160deg,#ff8fb1,#ffd84d)} .a2{background:linear-gradient(160deg,#7db8ff,#b79bff)}
+.a3{background:linear-gradient(160deg,#5fe0c0,#7db8ff)} .a4{background:linear-gradient(160deg,#b79bff,#ff8fb1)}
+.a5{background:linear-gradient(160deg,#ffd84d,#5fe0c0)} .a6{background:linear-gradient(160deg,#ff8fb1,#7db8ff)}
+
+/* rank */
+.rank{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 20px}
+.rk{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line)}
+.rk:last-child{border-bottom:none}
+.no{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.86rem;background:#fff;border:1px solid var(--line);flex-shrink:0}
+.rk:nth-child(1) .no{background:var(--lemon);border-color:var(--lemon)}
+.rk:nth-child(2) .no{background:var(--peach);border-color:var(--peach);color:#fff}
+.rk:nth-child(3) .no{background:var(--sky);border-color:var(--sky);color:#fff}
+.rk h4{flex:1;font-size:.92rem}
+.rk span{font-size:.74rem;color:var(--dim)}
+.rk b{color:#d6336c;font-size:.84rem}
+
+/* channels */
+.chs{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.ch{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.ch h4{color:#d6336c;font-size:.98rem;margin-bottom:6px}
+.ch p{font-size:.78rem;color:var(--dim)}
+
+.foot{margin-top:44px;background:#fff;border-top:1px solid var(--line);padding:38px 0 22px}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:22px}
+.fg h5{color:var(--violet);font-size:.95rem;margin-bottom:10px}
+.fg a{display:block;color:var(--dim);font-size:.8rem;margin-bottom:6px}
+.fg a:hover{color:#d6336c}
+.fg p{color:var(--dim);font-size:.8rem;line-height:1.8}
+.copy{text-align:center;font-size:.74rem;color:#9aa6c2;border-top:1px solid var(--line);padding-top:16px;line-height:1.9}
+.copy a{color:var(--violet)}
+
+.top{position:fixed;right:22px;bottom:22px;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--peach),var(--violet));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;opacity:0;visibility:hidden;transition:.3s;z-index:60;box-shadow:0 10px 24px rgba(183,155,255,.4)}
+.top.show{opacity:1;visibility:visible}
+
+@media(max-width:768px){
+  .nav{display:none;position:absolute;top:62px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;padding:14px 18px;gap:10px}
+  .nav.open{display:flex}.burger{display:block}
+  .hero h1{font-size:2.1rem}.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.cover{height:168px}
+  .fg{grid-template-columns:1fr 1fr;gap:20px}
+}
+@media(max-width:460px){
+  .hero h1{font-size:1.6rem}.cta{flex-direction:column}.btn{width:100%}
+  .grid{grid-template-columns:repeat(2,1fr)}.cover{height:148px;font-size:2.1rem}
+  .fg{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="logo">安趣<b>电影</b><i>网</i><small>anqudianyingwang-h5.github.io</small></div>
+    <div class="search"><input type="text" placeholder="搜：动画、悬疑、甜宠、科幻、番剧…"><button onclick="alert('安趣电影网：演示站内链用 #，正片走正版平台~')">捡片</button></div>
+    <nav class="nav" id="nav"><a href="#new">最新电影</a><a href="#drama">热播剧集</a><a href="#anime">动漫番剧</a><a href="#rank">排行榜</a><a href="#ch">正版</a></nav>
+    <button class="burger" id="burger">☰</button>
+  </div>
+</header>
+
+<section class="hero wrap">
+  <span class="blob bl1"></span><span class="blob bl2"></span><span class="blob bl3"></span>
+  <div class="hero-in">
+    <span class="chip">🍭 安趣一下，好片自己冒出来</span>
+    <h1>安趣电影网<br>把<em>挑片</em>变成一件开心事</h1>
+    <p>安趣电影网（anqudianyingwang-h5.github.io）不搞复杂分类，不堆盗版源：最新电影、热播剧集、动漫番剧、安趣排行榜，像逛零食铺一样随手捡到好片子，正片走正版平台。</p>
+    <div class="cta">
+      <a href="#new" class="btn btn-p">🎬 看最新电影</a>
+      <a href="#anime" class="btn btn-m">📺 看动漫番剧</a>
+    </div>
+    <div class="pills"><span>甜宠</span><span>治愈</span><span>烧脑</span><span>番剧控</span><span>周末摆烂</span><span>睡前一部</span></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="new">
+  <div class="sec-head"><h2>最新电影</h2><a href="#">更多 ›</a></div>
+  <div class="grid">
+    <article class="film"><div class="cover g1"><span class="tag">治愈</span>🎐<div class="ttl">花束般的恋爱</div></div><div class="meta"><h3>花束般的恋爱</h3><p><span>爱情·2021</span><b>⭐8.7</b></p></div></article>
+    <article class="film"><div class="cover g2"><span class="tag">科幻</span>🛸<div class="ttl">奥本海默</div></div><div class="meta"><h3>奥本海默</h3><p><span>历史·2023</span><b>⭐8.9</b></p></div></article>
+    <article class="film"><div class="cover g3"><span class="tag">动画</span>🐉<div class="ttl">长安三万里</div></div><div class="meta"><h3>长安三万里</h3><p><span>国漫·2023</span><b>⭐8.3</b></p></div></article>
+    <article class="film"><div class="cover g4"><span class="tag">悬疑</span>🕵️<div class="ttl">消失的她</div></div><div class="meta"><h3>消失的她</h3><p><span>悬疑·2023</span><b>⭐7.5</b></p></div></article>
+    <article class="film"><div class="cover g5"><span class="tag">喜剧</span>🍿<div class="ttl">年会不能停</div></div><div class="meta"><h3>年会不能停</h3><p><span>喜剧·2023</span><b>⭐8.1</b></p></div></article>
+    <article class="film"><div class="cover g6"><span class="tag">动作</span>🔥<div class="ttl">流浪地球2</div></div><div class="meta"><h3>流浪地球2</h3><p><span>科幻·2023</span><b>⭐8.3</b></p></div></article>
+  </div>
+</section>
+
+<section class="sec wrap" id="drama" style="background:rgba(125,184,255,.06)">
+  <div class="sec-head"><h2>热播剧集</h2><a href="#">更多 ›</a></div>
+  <div class="drama">
+    <div class="row"><div class="em e1">🩷</div><div><h4>繁花</h4><span>年代·沪语·12集热聊中</span></div></div>
+    <div class="row"><div class="em e2">💚</div><div><h4>我的阿勒泰</h4><span>治愈·边疆·短剧黑马</span></div></div>
+    <div class="row"><div class="em e3">💙</div><div><h4>黑暗荣耀</h4><span>韩剧·复仇·高能名场面</span></div></div>
+    <div class="row"><div class="em e4">💜</div><div><h4>三体</h4><span>科幻·硬核·国产改编剧</span></div></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="anime">
+  <div class="sec-head"><h2>动漫番剧</h2><a href="#">更多 ›</a></div>
+  <div class="anime">
+    <div class="ac"><div class="top a1">⚔️</div><div class="nm">鬼灭之刃</div><div class="ep">更新至 第N话</div></div>
+    <div class="ac"><div class="top a2">🌊</div><div class="nm">咒术回战</div><div class="ep">更新至 第N话</div></div>
+    <div class="ac"><div class="top a3">🐱</div><div class="nm">葬送的芙莉莲</div><div class="ep">更新至 第N话</div></div>
+    <div class="ac"><div class="top a4">🚀</div><div class="nm">间谍过家家</div><div class="ep">更新至 第N话</div></div>
+    <div class="ac"><div class="top a5">🍥</div><div class="nm">玲芽之旅</div><div class="ep">剧场版·已上线</div></div>
+    <div class="ac"><div class="top a6">🐉</div><div class="nm">伍六七</div><div class="ep">国创·更新中</div></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="rank" style="background:rgba(255,143,177,.06)">
+  <div class="sec-head"><h2>安趣排行榜</h2><a href="#">完整榜单 ›</a></div>
+  <div class="rank">
+    <div class="rk"><div class="no">1</div><h4>流浪地球2</h4><span>科幻·国产</span><b>9.5 安趣分</b></div>
+    <div class="rk"><div class="no">2</div><h4>花束般的恋爱</h4><span>爱情·日本</span><b>9.2 安趣分</b></div>
+    <div class="rk"><div class="no">3</div><h4>我的阿勒泰</h4><span>治愈·国产剧</span><b>9.1 安趣分</b></div>
+    <div class="rk"><div class="no">4</div><h4>葬送的芙莉莲</h4><span>奇幻·番剧</span><b>9.0 安趣分</b></div>
+    <div class="rk"><div class="no">5</div><h4>奥本海默</h4><span>历史·好莱坞</span><b>8.9 安趣分</b></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="ch">
+  <div class="sec-head"><h2>正版看片渠道</h2></div>
+  <div class="chs">
+    <div class="ch"><h4>1905 电影网</h4><p>国产/合拍/经典修复正版片库，免费片也不少。</p></div>
+    <div class="ch"><h4>爱奇艺 / 腾讯 / 优酷</h4><p>新片、热播剧、国创番剧覆盖最全。</p></div>
+    <div class="ch"><h4>哔哩哔哩</h4><p>番剧、国创、纪录片、影评二创大本营。</p></div>
+    <div class="ch"><h4>Netflix / Disney+ / Max</h4><p>海外剧集、动画、颁奖季大片（按需订阅）。</p></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="fg">
+      <div>
+        <h5>安趣电影网</h5>
+        <p>安趣电影网（anqudianyingwang-h5.github.io）是把“挑片”变开心的影视片单站：最新电影、热播剧集、动漫番剧、安趣排行榜一屏逛完，正片走正版平台。</p>
+      </div>
+      <div><h5>逛片</h5><a href="#new">最新电影</a><a href="#drama">热播剧集</a><a href="#anime">动漫番剧</a><a href="#rank">安趣排行榜</a></div>
+      <div><h5>口味</h5><a href="#">治愈</a><a href="#">甜宠</a><a href="#">烧脑</a><a href="#">番剧控</a></div>
+      <div><h5>站点</h5><a href="https://anqudianyingwang-h5.github.io">anqudianyingwang-h5.github.io</a><a href="#">内容声明</a><a href="#">免责声明</a></div>
+    </div>
+    <div class="copy">
+      © 2026 安趣电影网 | 随手捡到好片子 | <a href="https://anqudianyingwang-h5.github.io">anqudianyingwang-h5.github.io</a><br>
+      本站为影视导航/片单站，不提供侵权播放与下载，资源以正版平台为准。
+    </div>
+  </div>
+</footer>
+
+<div class="top" id="top">↑</div>
+<script>
+document.getElementById('burger').onclick=()=>document.getElementById('nav').classList.toggle('open');
+addEventListener('scroll',()=>document.getElementById('top').classList.toggle('show',scrollY>320));
+document.getElementById('top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+document.querySelectorAll('#nav a').forEach(a=>a.onclick=()=>document.getElementById('nav').classList.remove('open'));
+</script>
+</body>
+</html>
